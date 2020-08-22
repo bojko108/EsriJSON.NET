@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Fix the default copy local behaviour changed in VS 2015 -->
+    <DoNotCopyLocalIfInGac>true</DoNotCopyLocalIfInGac>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1775DF90-E39E-4E58-905B-0E9C79618879}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EsriJSON.NET</RootNamespace>
+    <AssemblyName>EsriJSON.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\EsriJSON.NET.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\EsriJSON.NET.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>bojko108.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ESRI.ArcGIS.Geodatabase, Version=10.6.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\ArcGIS\DeveloperKit10.6\DotNet\ESRI.ArcGIS.Geodatabase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geometry, Version=10.6.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\ArcGIS\DeveloperKit10.6\DotNet\ESRI.ArcGIS.Geometry.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SOESupport, Version=10.6.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\ArcGIS\DeveloperKit10.6\bin\ESRI.ArcGIS.SOESupport.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.System, Version=10.6.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\ArcGIS\DeveloperKit10.6\DotNet\ESRI.ArcGIS.System.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\JsonGeometryConverter.cs" />
+    <Compile Include="Converters\JsonRendererConverter.cs" />
+    <Compile Include="Converters\JsonSymbolConverter.cs" />
+    <Compile Include="Geometry\IJsonGeometry.cs" />
+    <Compile Include="Geometry\JsonPointGeometry.cs" />
+    <Compile Include="Geometry\JsonPolygonGeometry.cs" />
+    <Compile Include="Geometry\JsonPolylineGeometry.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="JsonDrawingInfo.cs" />
+    <Compile Include="JsonFeature.cs" />
+    <Compile Include="JsonFeatureSet.cs" />
+    <Compile Include="JsonFeatureSetContainer.cs" />
+    <Compile Include="JsonField.cs" />
+    <Compile Include="JsonLayer.cs" />
+    <Compile Include="JsonLayerContainer.cs" />
+    <Compile Include="JsonLayerDefinition.cs" />
+    <Compile Include="JsonSpatialReference.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\Enums.cs" />
+    <Compile Include="Renderers\JsonLabelingInfo.cs" />
+    <Compile Include="Renderers\JsonRenderer.cs" />
+    <Compile Include="Renderers\JsonSimpleRenderer.cs" />
+    <Compile Include="Renderers\JsonUniqueValueRenderer.cs" />
+    <Compile Include="Symbols\Enums.cs" />
+    <Compile Include="Symbols\JsonFontStyle.cs" />
+    <Compile Include="Symbols\JsonPictureFillSymbol.cs" />
+    <Compile Include="Symbols\JsonPictureMarkerSymbol.cs" />
+    <Compile Include="Symbols\JsonSimpleFillSymbol.cs" />
+    <Compile Include="Symbols\JsonSimpleLineSymbol.cs" />
+    <Compile Include="Symbols\JsonSimpleMarkerSymbol.cs" />
+    <Compile Include="Symbols\JsonSymbol.cs" />
+    <Compile Include="Symbols\JsonTextSymbol.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bojko108.pfx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
