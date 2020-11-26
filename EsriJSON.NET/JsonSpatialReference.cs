@@ -49,5 +49,14 @@ namespace EsriJSON.NET
             ISpatialReferenceFactory2 factory = new SpatialReferenceEnvironmentClass();
             return factory.CreateProjectedCoordinateSystem(this.WKID);
         }
+
+        /// <summary>
+        /// Clones this spatial reference
+        /// </summary>
+        /// <returns></returns>
+        public JsonSpatialReference Clone()
+        {
+            return new JsonSpatialReference(this.WKID);
+        }
     }
 }

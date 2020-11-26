@@ -7,7 +7,7 @@ using EsriJSON.NET.Helpers;
 namespace EsriJSON.NET.Geometry
 {
     /// <summary>
-    /// Represents a Polyline geometry, which can be serialized to EsriJSON
+    /// Represents a Polyline geometry, which can be serialized to EsriJSON (<see cref="https://developers.arcgis.com/documentation/common-data-types/geometry-objects.htm#POLYLINE"/>)
     /// </summary>
     public class JsonPolylineGeometry : IJsonGeometry
     {

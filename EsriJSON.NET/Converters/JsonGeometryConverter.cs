@@ -17,17 +17,13 @@ namespace EsriJSON.NET.Converters
             JObject geom = JObject.Load(reader);
 
             if (geom.GetValue("x") != null && geom.GetValue("y") != null)
-            {
                 return geom.ToObject<JsonPointGeometry>();
-            }
+            if (geom.GetValue("xmin") != null)
+                return geom.ToObject<JsonEnvelopeGeometry>();
             if (geom.GetValue("paths") != null)
-            {
                 return geom.ToObject<JsonPolylineGeometry>();
-            }
             if (geom.GetValue("rings") != null)
-            {
                 return geom.ToObject<JsonPolygonGeometry>();
-            }
 
             throw new Exception("Not supported geometry!");
         }

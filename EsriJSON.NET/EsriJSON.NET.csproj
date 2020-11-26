@@ -83,6 +83,7 @@
     <Compile Include="Converters\JsonRendererConverter.cs" />
     <Compile Include="Converters\JsonSymbolConverter.cs" />
     <Compile Include="Geometry\IJsonGeometry.cs" />
+    <Compile Include="Geometry\JsonEnvelopeGeometry.cs" />
     <Compile Include="Geometry\JsonPointGeometry.cs" />
     <Compile Include="Geometry\JsonPolygonGeometry.cs" />
     <Compile Include="Geometry\JsonPolylineGeometry.cs" />
