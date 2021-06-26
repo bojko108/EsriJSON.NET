@@ -87,5 +87,14 @@ namespace EsriJSON.NET.Geometry
             point.PutCoords(this.X, this.Y);
             return point;
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

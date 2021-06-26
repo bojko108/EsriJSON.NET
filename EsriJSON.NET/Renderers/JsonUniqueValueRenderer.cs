@@ -64,6 +64,15 @@ namespace EsriJSON.NET.Renderers
                 UniqueValueInfos = this.UniqueValueInfos.Select(i => i.Clone()).ToList()
             };
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 
     /// <summary>
@@ -99,6 +108,15 @@ namespace EsriJSON.NET.Renderers
                 Symbol = this.Symbol?.Clone(),
                 Value = this.Value
             };
+        }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

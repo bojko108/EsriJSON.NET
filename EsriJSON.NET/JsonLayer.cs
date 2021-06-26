@@ -46,5 +46,14 @@ namespace EsriJSON.NET
 
             this.FeatureSet = featureSet;
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

@@ -58,5 +58,14 @@ namespace EsriJSON.NET
         {
             return new JsonSpatialReference(this.WKID);
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

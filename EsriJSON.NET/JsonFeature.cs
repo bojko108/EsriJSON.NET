@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using EsriJSON.NET.Converters;
 using EsriJSON.NET.Geometry;
 using EsriJSON.NET.Symbols;
+using EsriJSON.NET.Helpers;
 
 namespace EsriJSON.NET
 {
@@ -71,15 +72,27 @@ namespace EsriJSON.NET
         /// Creates a new Feature from ESRI Feature (as readonly), ready to be serialized to EsriJSON
         /// </summary>
         /// <param name="esriFeature"></param>
-        public JsonFeature(IFeature esriFeature) : this()
+        /// <param name="useDomainDescriptions">If 'true' domain descriptions will be used instead of codes</param>
+        public JsonFeature(IFeature esriFeature, bool useDomainDescriptions = false) : this(esriFeature as IRow, useDomainDescriptions)
+        { }
+
+        /// <summary>
+        /// Creates a new Feature from ESRI Feature (as readonly), ready to be serialized to EsriJSON
+        /// </summary>
+        /// <param name="esriRow"></param>
+        /// <param name="useDomainDescriptions">If 'true' domain descriptions will be used instead of codes</param>
+        public JsonFeature(IRow esriRow, bool useDomainDescriptions = false) : this()
         {
-            this.feature = esriFeature;
+            this.feature = esriRow;
 
             for (int i = 0; i < this.feature.Fields.FieldCount; i++)
             {
                 IField field = this.feature.Fields.Field[i];
                 if (field.Type != esriFieldType.esriFieldTypeGeometry)
-                    this.SetValue(field.Name, this.feature.Value[i]);
+                {
+                    object value = useDomainDescriptions ? this.feature.Get(i, null) : this.feature.Value[i];
+                    this.SetValue(field.Name, value);
+                }
             }
 
             if (this.HasGISGeometry)
@@ -102,17 +115,6 @@ namespace EsriJSON.NET
                 }
 
                 this.Geometry = jsonGeometry;
-            }
-        }
-
-        public JsonFeature(IRow esriRow) : this()
-        {
-            this.feature = esriRow;
-
-            for (int i = 0; i < this.feature.Fields.FieldCount; i++)
-            {
-                IField field = this.feature.Fields.Field[i];
-                this.SetValue(field.Name, this.feature.Value[i]);
             }
         }
 
@@ -212,6 +214,15 @@ namespace EsriJSON.NET
             feature.Symbol = this.Symbol;
 
             return feature;
+        }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

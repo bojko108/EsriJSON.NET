@@ -79,5 +79,14 @@ namespace EsriJSON.NET.Symbols
                 YScale = this.YScale
             };
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

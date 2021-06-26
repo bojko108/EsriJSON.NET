@@ -246,5 +246,14 @@ namespace EsriJSON.NET
         {
             return this.Features.Remove(feature);
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

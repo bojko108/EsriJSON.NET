@@ -130,5 +130,14 @@ namespace EsriJSON.NET.Geometry
                 SpatialReference = this.SpatialReference.Clone()
             };
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

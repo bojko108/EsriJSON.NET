@@ -84,6 +84,14 @@ namespace EsriJSON.NET.Symbols
                 Outline = this.Outline != null ? (JsonSimpleLineSymbol)this.Outline.Clone() : null
             };
         }
-    }
 
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+    }
 }

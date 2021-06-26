@@ -4,6 +4,7 @@ using ESRI.ArcGIS.SOESupport;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -60,7 +61,6 @@ namespace EsriJSON.NET.Helpers
 
             return Encoding.UTF8.GetString(jsonBytes);
         }
-
 
         /// <summary>
         /// Get the records from a Feature Cursor object
@@ -146,6 +146,66 @@ namespace EsriJSON.NET.Helpers
             }
 
             return result;
+        }
+
+
+        /// <summary>
+        ///     Returns the description for the specified field from the <paramref name="source" /> (if linked to a domain).
+        /// </summary>
+        /// <param name="source">The row.</param>
+        /// <param name="index">The index.</param>
+        /// <param name="fallbackValue">The default value.</param>
+        /// <returns>
+        ///     Returns a <see cref="string" /> representing the converted value to the specified type.
+        /// </returns>
+        /// <exception cref="IndexOutOfRangeException"></exception>
+        public static string Get(this IRow source, int index, string fallbackValue = null)
+        {
+            if (source == null) return fallbackValue;
+            if (index < 0 || index > source.Fields.FieldCount - 1)
+                throw new IndexOutOfRangeException();
+
+            IField field = source.Fields.Field[index];
+            if (field.Domain is ICodedValueDomain domain)
+            {
+                return domain.GetDescription(source.Value[index]);
+            }
+            else
+            {
+                return TypeCast.Cast(source.Value[index], fallbackValue);
+            }
+        }
+
+        /// <summary>
+        ///     Finds the description in the domain that matches the specified <paramref name="value" />
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>Returns a <see cref="string" /> representing the name (or description) otherwise <c>null</c>.</returns>
+        public static string GetDescription(this ICodedValueDomain source, object value)
+        {
+            if ((source == null) || (value == null) || Convert.IsDBNull(value))
+            {
+                return null;
+            }
+
+            return (from entry in source.AsEnumerable() where entry.Value.Equals(value.ToString()) select entry.Key).FirstOrDefault();
+        }
+
+        /// <summary>
+        ///     Creates an <see cref="IEnumerable{T}" /> from an <see cref="ICodedValueDomain" />
+        /// </summary>
+        /// <param name="source">An <see cref="ICodedValueDomain" /> to create an <see cref="IEnumerable{T}" /> from.</param>
+        /// <returns>An <see cref="IEnumerable{T}" /> that contains the domain from the input source.</returns>
+        public static IEnumerable<KeyValuePair<string, string>> AsEnumerable(this ICodedValueDomain source)
+        {
+            if (source != null)
+            {
+                for (int i = 0; i < source.CodeCount; i++)
+                {
+                    yield return new KeyValuePair<string, string>(source.Name[i], TypeCast.Cast(source.Value[i], string.Empty));
+                }
+            }
         }
     }
 }

@@ -29,5 +29,14 @@ namespace EsriJSON.NET.Renderers
 
         [JsonProperty("where")]
         public string WhereClause { get; set; }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

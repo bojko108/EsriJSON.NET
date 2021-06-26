@@ -63,5 +63,14 @@ namespace EsriJSON.NET
         {
             this.Fields = new List<JsonField>();
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

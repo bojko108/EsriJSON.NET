@@ -119,5 +119,14 @@ namespace EsriJSON.NET.Geometry
                 this.Paths.Add(new List<double[]>() { coords });
             }
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

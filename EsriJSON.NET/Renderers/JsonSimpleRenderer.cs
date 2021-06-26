@@ -50,5 +50,14 @@ namespace EsriJSON.NET.Renderers
         {
             return new JsonSimpleRenderer(this.Symbol?.Clone(), this.Label, this.Description);
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

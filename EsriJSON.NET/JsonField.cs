@@ -50,5 +50,14 @@ namespace EsriJSON.NET
             this.FieldType = fieldType;
             this.Length = length;
         }
+
+        /// <summary>
+        /// Returns the JSON text representing this object
+        /// </summary>
+        /// <returns></returns>
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }

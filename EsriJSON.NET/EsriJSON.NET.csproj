@@ -88,6 +88,7 @@
     <Compile Include="Geometry\JsonPolygonGeometry.cs" />
     <Compile Include="Geometry\JsonPolylineGeometry.cs" />
     <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\TypeCast.cs" />
     <Compile Include="JsonDrawingInfo.cs" />
     <Compile Include="JsonFeature.cs" />
     <Compile Include="JsonFeatureSet.cs" />
